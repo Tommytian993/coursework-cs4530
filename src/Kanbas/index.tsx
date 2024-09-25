@@ -3,14 +3,19 @@ import Account from "./Account";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
+import { Link } from "react-router-dom";
 export default function Kanbas() {
   return (
     <div id="wd-kanbas">
+      <h2>Tianye Wang | Tuesday Night 6 - 9 PM Section</h2>
+      <a href="https://github.com/Jerrytian993/kanbas-react-web-app">
+        This is the Github Code Repo
+      </a>
       <table>
         <tr>
-          {/* <td valign="top">
+          <td valign="top">
             <KanbasNavigation />
-          </td> */}
+          </td>
           <td valign="top">
             <Routes>
               <Route path="/" element={<Navigate to="/Kanbas/Account" />} />

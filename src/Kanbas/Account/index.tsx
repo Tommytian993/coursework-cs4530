@@ -8,9 +8,9 @@ export default function Account() {
     <div id="wd-account-screen">
       <table>
         <tr>
-          <td valign="top">
+          {/* <td valign="top">
             <AccountNavigation />
-          </td>
+          </td> */}
           <td valign="top">
             <Routes>
               <Route
