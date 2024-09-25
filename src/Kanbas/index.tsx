@@ -11,6 +11,8 @@ export default function Kanbas() {
       <a href="https://github.com/Jerrytian993/kanbas-react-web-app">
         This is the Github Code Repo
       </a>
+      <br />
+      <br />
       <table>
         <tr>
           <td valign="top">
