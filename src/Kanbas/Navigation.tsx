@@ -32,7 +32,7 @@ export default function KanbasNavigation() {
         to="/Kanbas/Dashboard"
         id="wd-dashboard-link"
         className="list-group-item text-center border-0
-              bg-black text-danger"
+              bg-black text-white"
       >
         <AiOutlineDashboard className="fs-1 text-danger" />
         <br />
@@ -70,7 +70,7 @@ export default function KanbasNavigation() {
         Inbox{" "}
       </Link>
       <Link
-        to="/Kanbas/Dashboard"
+        to="/Labs"
         id="wd-course-link"
         className="list-group-item text-white
               bg-black text-center border-0"
