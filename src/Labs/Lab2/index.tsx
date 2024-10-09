@@ -14,6 +14,11 @@ import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
 import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
 export default function Lab2() {
   return (
     <div id="wd-lab2" className="container">
@@ -88,6 +93,11 @@ export default function Lab2() {
       <Flex></Flex>
       <ReactIconsSampler></ReactIconsSampler>
       <BootstrapGrids></BootstrapGrids>
+      <ScreenSizeLabel></ScreenSizeLabel>
+      <BootstrapTables></BootstrapTables>
+      <BootstrapLists></BootstrapLists>
+      <BootstrapForms></BootstrapForms>
+      <BootstrapNavigation></BootstrapNavigation>
     </div>
   );
 }
