@@ -31,17 +31,20 @@ export default function Assignments() {
       </div>
 
       <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-        <div className="wd-title p-3 ps-2 bg-secondary">
-          <BsGripVertical className="me-2 fs-3" />
-          <FaChevronDown className="me-2" />
-          <span>ASSIGNMENTS</span>
-          <div className="float-end">
+        <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center">
+            <BsGripVertical className="me-2 fs-3" />
+            <FaChevronDown className="me-2" />
+            <span>ASSIGNMENTS</span>
+          </div>
+
+          <div className="d-flex align-items-center ms-auto">
             <span className="badge bg-light text-dark fs-6 me-2">
               40% of Total
             </span>
-            <button className="btn btn-outline-secondary">+</button>
+            <button className="btn btn-outline-secondary me-3">+</button>
+            <ModuleControlButtons />
           </div>
-          <ModuleControlButtons />
         </div>
         <ul className="wd-lessons list-group rounded-0">
           <li className="wd-lesson list-group-item p-3 ps-1">

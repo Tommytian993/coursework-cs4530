@@ -1,5 +1,5 @@
 import React from "react";
-import { FaChevronDown } from "react-icons/fa"; // 导入 ChevronDown 图标
+import { FaChevronDown } from "react-icons/fa";
 
 export default function AssignmentEditor() {
   return (
@@ -84,129 +84,146 @@ export default function AssignmentEditor() {
         </div>
       </div>
 
-      {/* Submission Type with Chevron */}
+      {/* Submission Type and Online Entry Options */}
       <div className="row mb-3">
         <label htmlFor="wd-submission-type" className="col-sm-2 col-form-label">
           Submission Type
         </label>
         <div className="col-sm-10">
-          <div className="input-group">
-            <select id="wd-submission-type" className="form-control">
-              <option value="Online">Online</option>
-            </select>
-            <span className="input-group-text">
-              <FaChevronDown />
-            </span>
+          <div className="card p-3">
+            <div className="input-group mb-3">
+              <select id="wd-submission-type" className="form-control">
+                <option value="Online">Online</option>
+              </select>
+              <span className="input-group-text">
+                <FaChevronDown />
+              </span>
+            </div>
+
+            {/* Online Entry Options */}
+            <div>
+              <h5>Online Entry Options</h5>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="wd-text-entry"
+                />
+                <label className="form-check-label" htmlFor="wd-text-entry">
+                  Text Entry
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="wd-website-url"
+                  defaultChecked
+                />
+                <label className="form-check-label" htmlFor="wd-website-url">
+                  Website URL
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="wd-media-recordings"
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="wd-media-recordings"
+                >
+                  Media Recordings
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="wd-student-annotation"
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="wd-student-annotation"
+                >
+                  Student Annotation
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="wd-file-upload"
+                />
+                <label className="form-check-label" htmlFor="wd-file-upload">
+                  File Uploads
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Online Entry Options */}
+      {/* Assign To, Due, Available From in a Card */}
       <div className="row mb-3">
-        <label className="col-sm-2 col-form-label">Online Entry Options</label>
+        <label className="col-sm-2 col-form-label">Assign</label>
         <div className="col-sm-10">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="wd-text-entry"
-            />
-            <label className="form-check-label" htmlFor="wd-text-entry">
-              Text Entry
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="wd-website-url"
-              defaultChecked
-            />
-            <label className="form-check-label" htmlFor="wd-website-url">
-              Website URL
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="wd-media-recordings"
-            />
-            <label className="form-check-label" htmlFor="wd-media-recordings">
-              Media Recordings
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="wd-student-annotation"
-            />
-            <label className="form-check-label" htmlFor="wd-student-annotation">
-              Student Annotation
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="wd-file-upload"
-            />
-            <label className="form-check-label" htmlFor="wd-file-upload">
-              File Uploads
-            </label>
-          </div>
-        </div>
-      </div>
+          <div className="card p-3">
+            <div className="row mb-3">
+              <label htmlFor="wd-assign-to" className="col-sm-2 col-form-label">
+                Assign To
+              </label>
+              <div className="col-sm-10">
+                <input
+                  id="wd-assign-to"
+                  className="form-control"
+                  value="Everyone"
+                />
+              </div>
+            </div>
 
-      {/* Assign To */}
-      <div className="row mb-3">
-        <label htmlFor="wd-assign-to" className="col-sm-2 col-form-label">
-          Assign To
-        </label>
-        <div className="col-sm-10">
-          <input id="wd-assign-to" className="form-control" value="Everyone" />
-        </div>
-      </div>
+            {/* Due Date */}
+            <div className="row mb-3">
+              <label htmlFor="wd-due-date" className="col-sm-2 col-form-label">
+                Due
+              </label>
+              <div className="col-sm-10">
+                <input
+                  id="wd-due-date"
+                  type="date"
+                  className="form-control"
+                  value="2024-05-13"
+                />
+              </div>
+            </div>
 
-      {/* Due Date */}
-      <div className="row mb-3">
-        <label htmlFor="wd-due-date" className="col-sm-2 col-form-label">
-          Due
-        </label>
-        <div className="col-sm-10">
-          <input
-            id="wd-due-date"
-            type="date"
-            className="form-control"
-            value="2024-05-13"
-          />
-        </div>
-      </div>
-
-      {/* Available From and Until */}
-      <div className="row mb-3">
-        <label htmlFor="wd-available-from" className="col-sm-2 col-form-label">
-          Available from
-        </label>
-        <div className="col-sm-5">
-          <input
-            id="wd-available-from"
-            type="date"
-            className="form-control"
-            value="2024-05-06"
-          />
-        </div>
-        <label htmlFor="wd-available-until" className="col-sm-2 col-form-label">
-          Until
-        </label>
-        <div className="col-sm-5">
-          <input
-            id="wd-available-until"
-            type="date"
-            className="form-control"
-            value="2024-05-20"
-          />
+            {/* Available From and Until */}
+            <div className="row mb-3">
+              <div className="col-sm-6">
+                <label htmlFor="wd-available-from" className="col-form-label">
+                  Available from
+                </label>
+                <input
+                  id="wd-available-from"
+                  type="date"
+                  className="form-control"
+                  value="2024-05-06"
+                />
+              </div>
+              <div className="col-sm-6">
+                <label htmlFor="wd-available-until" className="col-form-label">
+                  Until
+                </label>
+                <input
+                  id="wd-available-until"
+                  type="date"
+                  className="form-control"
+                  value="2024-05-20"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
