@@ -11,7 +11,7 @@ export default function Signin() {
         type="password"
       />{" "}
       <br />
-      <Link id="wd-signin-btn" to="/Kanbas/Account/Profile">
+      <Link id="wd-signin-btn" to="/Kanbas/Dashboard">
         {" "}
         Sign in{" "}
       </Link>{" "}
