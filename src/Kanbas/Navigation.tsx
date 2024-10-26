@@ -9,56 +9,45 @@ export default function KanbasNavigation() {
     <div
       id="wd-kanbas-navigation"
       style={{ width: 120 }}
-      className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
+      className="position-fixed bottom-0 top-0 d-none d-md-block bg-white z-2"
     >
-      <a
-        id="wd-neu-link"
-        target="_blank"
-        href="https://www.northeastern.edu/"
-        className="list-group-item bg-black border-0 text-center"
-      >
-        <img src="/images/NEU.png" width="75px" />
-      </a>
-      <Link
-        to="/Kanbas/Account"
-        id="wd-account-link"
-        className="list-group-item text-center border-0 bg-black text-white"
-      >
-        {FaRegCircleUser({ className: "fs-1 text text-white" })}
-        Account
-      </Link>
-      <Link
-        to="/Kanbas/Dashboard"
-        id="wd-dashboard-link"
-        className="list-group-item text-center border-0 bg-white text-danger"
-      >
-        {AiOutlineDashboard({ className: "fs-1 text-danger" })}
-        Dashboard
-      </Link>
-      <Link
-        to="/Kanbas/Dashboard"
-        id="wd-course-link"
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        {LiaBookSolid({ className: "fs-1 text-danger" })}
-        Courses
-      </Link>
-      <Link
-        to="/Kanbas/Calendar"
-        id="wd-calendar-link"
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        {IoCalendarOutline({ className: "fs-1 text-danger" })}
-        Calendar
-      </Link>
-      <Link
-        to="/Kanbas/Inbox"
-        id="wd-inbox-link"
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        {FaInbox({ className: "fs-1 text-danger" })}
-        Inbox
-      </Link>
+      {/* Northeastern Logo Section */}
+      <div className="bg-black text-center p-2">
+        <div className="text-danger fs-1 fw-bold">N</div>
+        <div className="text-white small">LUX VERITAS VIRTUS</div>
+      </div>
+
+      {/* Account Section */}
+      <div className="bg-black text-center p-2">
+        {FaRegCircleUser({ className: "fs-2 text-white" })}
+        <div className="text-white small">Account</div>
+      </div>
+
+      {/* Dashboard Section - Standalone White */}
+      <div className="bg-white text-center p-2 border">
+        {AiOutlineDashboard({ className: "fs-2 text-danger" })}
+        <div className="text-danger small">Dashboard</div>
+      </div>
+
+      {/* Navigation Items Section */}
+      <div className="bg-black text-center p-2">
+        <div className="mb-2">
+          {LiaBookSolid({ className: "fs-2 text-danger" })}
+          <div className="text-white small">Courses</div>
+        </div>
+        <div className="mb-2">
+          {IoCalendarOutline({ className: "fs-2 text-danger" })}
+          <div className="text-white small">Calendar</div>
+        </div>
+        <div className="mb-2">
+          {FaInbox({ className: "fs-2 text-danger" })}
+          <div className="text-white small">Inbox</div>
+        </div>
+        <div>
+          {LiaCogSolid({ className: "fs-2 text-danger" })}
+          <div className="text-white small">Labs</div>
+        </div>
+      </div>
     </div>
   );
 }
