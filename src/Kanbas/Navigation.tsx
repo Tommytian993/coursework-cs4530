@@ -24,7 +24,7 @@ export default function KanbasNavigation() {
         id="wd-account-link"
         className="list-group-item text-center border-0 bg-black text-white"
       >
-        <FaRegCircleUser className="fs-1 text text-white" />
+        {FaRegCircleUser({ className: "fs-1 text text-white" })}
         Account
       </Link>
       <Link
@@ -32,7 +32,7 @@ export default function KanbasNavigation() {
         id="wd-dashboard-link"
         className="list-group-item text-center border-0 bg-white text-danger"
       >
-        <AiOutlineDashboard className="fs-1 text-danger" />
+        {AiOutlineDashboard({ className: "fs-1 text-danger" })}
         Dashboard
       </Link>
       <Link
@@ -40,7 +40,7 @@ export default function KanbasNavigation() {
         id="wd-course-link"
         className="list-group-item text-white bg-black text-center border-0"
       >
-        <LiaBookSolid className="fs-1 text-danger" />
+        {LiaBookSolid({ className: "fs-1 text-danger" })}
         Courses
       </Link>
       <Link
@@ -48,7 +48,7 @@ export default function KanbasNavigation() {
         id="wd-calendar-link"
         className="list-group-item text-white bg-black text-center border-0"
       >
-        <IoCalendarOutline className="fs-1 text-danger" />
+        {IoCalendarOutline({ className: "fs-1 text-danger" })}
         Calendar
       </Link>
       <Link
@@ -56,7 +56,7 @@ export default function KanbasNavigation() {
         id="wd-inbox-link"
         className="list-group-item text-white bg-black text-center border-0"
       >
-        <FaInbox className="fs-1 text-danger" />
+        {FaInbox({ className: "fs-1 text-danger" })}
         Inbox
       </Link>
     </div>
