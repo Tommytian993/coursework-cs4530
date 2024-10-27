@@ -9,6 +9,13 @@ body * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Ensure navigation takes full height */
+#wd-kanbas-navigation {
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+}
+
 /* Responsive layout: offset main content when sidebar is visible */
 @media (min-width: 768px) {
   /* Add left padding to main content to avoid sidebar overlap */
