@@ -23,10 +23,12 @@ body * {
   z-index: 1000 !important;
 }
 
-/* Force flexbox layout on navigation */
-#wd-kanbas #wd-kanbas-navigation {
-  display: flex !important;
-  flex-direction: column !important;
+/* Force flexbox layout on navigation - only when visible */
+@media (min-width: 768px) {
+  #wd-kanbas #wd-kanbas-navigation {
+    display: flex !important;
+    flex-direction: column !important;
+  }
 }
 
 /* Responsive layout: offset main content when sidebar is visible */
