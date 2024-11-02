@@ -15,7 +15,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/1234/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS1234 React JS
@@ -35,7 +35,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/2345/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS2345 Web Dev
@@ -55,7 +55,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/3456/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS3456 Node.js
@@ -75,7 +75,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/4567/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS4567 Databases
@@ -95,7 +95,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/5678/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS5678 Algorithms
@@ -115,7 +115,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/6789/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS6789 Systems
@@ -135,7 +135,7 @@ export default function Dashboard() {
               className="wd-dashboard-course-link text-decoration-none text-dark"
               to="/Kanbas/Courses/7890/Home"
             >
-              <img src="/src/logo.svg" width="100%" height={160} />
+              <img src="/logo.svg" width="100%" height={160} />
               <div className="card-body">
                 <h5 className="wd-dashboard-course-title card-title">
                   CS7890 Networks
