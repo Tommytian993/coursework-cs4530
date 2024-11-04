@@ -11,8 +11,8 @@ import {
 
 export default function CourseStatus() {
   return (
-    <div id="wd-course-status">
-      <h2>Course Status</h2>
+    <div id="wd-course-status" className="ms-3">
+      <h2 className="mb-3">Course Status</h2>
 
       {/* Publish/Unpublish Buttons */}
       <div className="d-flex gap-2 mb-3">
