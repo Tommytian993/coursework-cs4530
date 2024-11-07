@@ -7,19 +7,22 @@ export default function AccountNavigation() {
         to={`/Kanbas/Account/Signin`}
         className="list-group-item active border border-0"
       >
-        Signin
+        {" "}
+        Signin{" "}
       </Link>
       <Link
         to={`/Kanbas/Account/Signup`}
         className="list-group-item text-danger border border-0"
       >
-        Signup
+        {" "}
+        Signup{" "}
       </Link>
       <Link
         to={`/Kanbas/Account/Profile`}
         className="list-group-item text-danger border border-0"
       >
-        Profile
+        {" "}
+        Profile{" "}
       </Link>
     </div>
   );
