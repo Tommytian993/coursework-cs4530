@@ -13,7 +13,10 @@ export default function Assignments() {
       {/* Search and Action Buttons Row */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div className="position-relative">
-          <FaSearch className="position-absolute top-50 start-0 translate-middle-y ms-2 text-muted" />
+          {FaSearch({
+            className:
+              "position-absolute top-50 start-0 translate-middle-y ms-2 text-muted",
+          })}
           <input
             id="wd-search-assignment"
             placeholder="Search..."
@@ -26,10 +29,10 @@ export default function Assignments() {
             id="wd-add-assignment-group"
             className="btn btn-outline-secondary"
           >
-            <FaPlus className="me-1" />+ Group
+            {FaPlus({ className: "me-1" })}+ Group
           </button>
           <button id="wd-add-assignment" className="btn btn-danger">
-            <FaPlus className="me-1" />+ Assignment
+            {FaPlus({ className: "me-1" })}+ Assignment
           </button>
         </div>
       </div>
@@ -37,16 +40,16 @@ export default function Assignments() {
       {/* Assignments Section Header */}
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div className="d-flex align-items-center">
-          <FaEllipsisV className="me-2 text-muted" />
-          <FaCaretDown className="me-2 text-muted" />
+          {FaEllipsisV({ className: "me-2 text-muted" })}
+          {FaCaretDown({ className: "me-2 text-muted" })}
           <h3 id="wd-assignments-title" className="mb-0 fw-bold">
             ASSIGNMENTS
           </h3>
         </div>
         <div className="d-flex align-items-center">
           <span className="badge bg-light text-dark me-2">40% of Total</span>
-          <FaPlus className="me-2 text-muted" />
-          <FaEllipsisV className="text-muted" />
+          {FaPlus({ className: "me-2 text-muted" })}
+          {FaEllipsisV({ className: "text-muted" })}
         </div>
       </div>
 
@@ -58,9 +61,9 @@ export default function Assignments() {
         >
           <div className="d-flex justify-content-between align-items-start">
             <div className="d-flex align-items-start">
-              <FaEllipsisV className="me-3 mt-1 text-muted" />
+              {FaEllipsisV({ className: "me-3 mt-1 text-muted" })}
               <div className="d-flex align-items-center me-3">
-                <FaFileAlt className="text-muted" />
+                {FaFileAlt({ className: "text-muted" })}
               </div>
               <div>
                 <a
@@ -77,8 +80,8 @@ export default function Assignments() {
               </div>
             </div>
             <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success me-2" />
-              <FaEllipsisV className="text-muted" />
+              {FaCheckCircle({ className: "text-success me-2" })}
+              {FaEllipsisV({ className: "text-muted" })}
             </div>
           </div>
         </li>
@@ -89,9 +92,9 @@ export default function Assignments() {
         >
           <div className="d-flex justify-content-between align-items-start">
             <div className="d-flex align-items-start">
-              <FaEllipsisV className="me-3 mt-1 text-muted" />
+              {FaEllipsisV({ className: "me-3 mt-1 text-muted" })}
               <div className="d-flex align-items-center me-3">
-                <FaFileAlt className="text-muted" />
+                {FaFileAlt({ className: "text-muted" })}
               </div>
               <div>
                 <a
@@ -108,8 +111,8 @@ export default function Assignments() {
               </div>
             </div>
             <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success me-2" />
-              <FaEllipsisV className="text-muted" />
+              {FaCheckCircle({ className: "text-success me-2" })}
+              {FaEllipsisV({ className: "text-muted" })}
             </div>
           </div>
         </li>
@@ -120,9 +123,9 @@ export default function Assignments() {
         >
           <div className="d-flex justify-content-between align-items-start">
             <div className="d-flex align-items-start">
-              <FaEllipsisV className="me-3 mt-1 text-muted" />
+              {FaEllipsisV({ className: "me-3 mt-1 text-muted" })}
               <div className="d-flex align-items-center me-3">
-                <FaFileAlt className="text-muted" />
+                {FaFileAlt({ className: "text-muted" })}
               </div>
               <div>
                 <a
@@ -139,8 +142,8 @@ export default function Assignments() {
               </div>
             </div>
             <div className="d-flex align-items-center">
-              <FaCheckCircle className="text-success me-2" />
-              <FaEllipsisV className="text-muted" />
+              {FaCheckCircle({ className: "text-success me-2" })}
+              {FaEllipsisV({ className: "text-muted" })}
             </div>
           </div>
         </li>
