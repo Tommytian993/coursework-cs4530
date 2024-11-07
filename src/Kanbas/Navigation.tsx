@@ -1,10 +1,20 @@
-import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { Link, useLocation } from "react-router-dom";
 
 export default function KanbasNavigation() {
+  const { pathname } = useLocation();
+
+  const links = [
+    { label: "Dashboard", path: "/Kanbas/Dashboard", icon: AiOutlineDashboard },
+    { label: "Courses", path: "/Kanbas/Dashboard", icon: LiaBookSolid },
+    { label: "Calendar", path: "/Kanbas/Calendar", icon: IoCalendarOutline },
+    { label: "Inbox", path: "/Kanbas/Inbox", icon: FaInbox },
+    { label: "Labs", path: "/Labs", icon: LiaCogSolid },
+  ];
+
   return (
     <div
       id="wd-kanbas-navigation"
@@ -19,49 +29,50 @@ export default function KanbasNavigation() {
 
       {/* Account Section */}
       <Link to="/Kanbas/Account" className="text-decoration-none flex-shrink-0">
-        <div className="bg-black text-center p-2 hover-bg-dark">
-          {FaRegCircleUser({ className: "fs-2 text-white" })}
-          <div className="text-white small">Account</div>
-        </div>
-      </Link>
-
-      {/* Dashboard Section - Standalone White */}
-      <Link
-        to="/Kanbas/Dashboard"
-        className="text-decoration-none flex-shrink-0"
-      >
-        <div className="bg-white text-center p-2 border hover-bg-light">
-          {AiOutlineDashboard({ className: "fs-2 text-danger" })}
-          <div className="text-danger small">Dashboard</div>
+        <div
+          className={`text-center p-2 ${
+            pathname.includes("Account") ? "bg-white" : "bg-black"
+          }`}
+        >
+          {FaRegCircleUser({
+            className: `fs-2 ${
+              pathname.includes("Account") ? "text-danger" : "text-white"
+            }`,
+          })}
+          <div
+            className={`small ${
+              pathname.includes("Account") ? "text-danger" : "text-white"
+            }`}
+          >
+            Account
+          </div>
         </div>
       </Link>
 
       {/* Navigation Items Section - Takes remaining space */}
       <div className="bg-black text-center p-2 flex-grow-1 d-flex flex-column justify-content-start">
-        <Link to="/Kanbas/Dashboard" className="text-decoration-none mb-2">
-          <div className="hover-bg-dark p-1 rounded">
-            {LiaBookSolid({ className: "fs-2 text-danger" })}
-            <div className="text-white small">Courses</div>
-          </div>
-        </Link>
-        <Link to="/Kanbas/Calendar" className="text-decoration-none mb-2">
-          <div className="hover-bg-dark p-1 rounded">
-            {IoCalendarOutline({ className: "fs-2 text-danger" })}
-            <div className="text-white small">Calendar</div>
-          </div>
-        </Link>
-        <Link to="/Kanbas/Inbox" className="text-decoration-none mb-2">
-          <div className="hover-bg-dark p-1 rounded">
-            {FaInbox({ className: "fs-2 text-danger" })}
-            <div className="text-white small">Inbox</div>
-          </div>
-        </Link>
-        <Link to="/Labs" className="text-decoration-none">
-          <div className="hover-bg-dark p-1 rounded">
-            {LiaCogSolid({ className: "fs-2 text-danger" })}
-            <div className="text-white small">Labs</div>
-          </div>
-        </Link>
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className="text-decoration-none mb-2"
+          >
+            <div className="hover-bg-dark p-1 rounded">
+              {link.icon({
+                className: `fs-2 ${
+                  pathname.includes(link.label) ? "text-danger" : "text-danger"
+                }`,
+              })}
+              <div
+                className={`small ${
+                  pathname.includes(link.label) ? "text-danger" : "text-white"
+                }`}
+              >
+                {link.label}
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
