@@ -15,6 +15,17 @@ export default function KanbasNavigation() {
     { label: "Labs", path: "/Labs", icon: LiaCogSolid },
   ];
 
+  // Helper function to check if link is active
+  const isLinkActive = (link: any) => {
+    if (link.label === "Dashboard") {
+      return pathname === "/Kanbas/Dashboard";
+    }
+    if (link.label === "Courses") {
+      return pathname.startsWith("/Kanbas/Courses");
+    }
+    return pathname.startsWith(link.path);
+  };
+
   return (
     <div
       id="wd-kanbas-navigation"
@@ -51,28 +62,31 @@ export default function KanbasNavigation() {
 
       {/* Navigation Items Section - Takes remaining space */}
       <div className="bg-black text-center p-2 flex-grow-1 d-flex flex-column justify-content-start">
-        {links.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            className="text-decoration-none mb-2"
-          >
-            <div className="hover-bg-dark p-1 rounded">
-              {link.icon({
-                className: `fs-2 ${
-                  pathname.includes(link.label) ? "text-danger" : "text-danger"
-                }`,
-              })}
+        {links.map((link) => {
+          const active = isLinkActive(link);
+          return (
+            <Link
+              key={link.path}
+              to={link.path}
+              className="text-decoration-none mb-2"
+            >
               <div
-                className={`small ${
-                  pathname.includes(link.label) ? "text-danger" : "text-white"
+                className={`p-1 rounded ${
+                  active ? "bg-white" : "hover-bg-dark"
                 }`}
               >
-                {link.label}
+                {link.icon({
+                  className: `fs-2 ${active ? "text-danger" : "text-danger"}`,
+                })}
+                <div
+                  className={`small ${active ? "text-danger" : "text-white"}`}
+                >
+                  {link.label}
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
