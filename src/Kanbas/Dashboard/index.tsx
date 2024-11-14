@@ -22,6 +22,10 @@ export default function Dashboard() {
     setCourses([...courses, newCourse]);
   };
 
+  const deleteCourse = (courseId: string) => {
+    setCourses(courses.filter((course) => course._id !== courseId));
+  };
+
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
@@ -91,6 +95,16 @@ export default function Dashboard() {
                     {courseItem.description}
                   </p>
                   <button className="btn btn-primary"> Go </button>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      deleteCourse(courseItem._id);
+                    }}
+                    className="btn btn-danger float-end"
+                    id="wd-delete-course-click"
+                  >
+                    Delete
+                  </button>
                 </div>
               </Link>
             </div>
