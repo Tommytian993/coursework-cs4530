@@ -1,4 +1,16 @@
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import * as db from "../../Database";
+
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignments = db.assignments;
+  const assignment = assignments.find((a: any) => a._id === aid);
+
+  if (!assignment) {
+    return <div>Assignment not found</div>;
+  }
+
   return (
     <div id="wd-assignments-editor" className="p-4">
       {/* Assignment Name */}
@@ -6,7 +18,11 @@ export default function AssignmentEditor() {
         <label htmlFor="wd-name" className="form-label fw-bold">
           Assignment Name
         </label>
-        <input id="wd-name" value="A1 - ENV + HTML" className="form-control" />
+        <input
+          id="wd-name"
+          defaultValue={assignment.title}
+          className="form-control"
+        />
       </div>
 
       {/* Assignment Description */}
@@ -14,14 +30,12 @@ export default function AssignmentEditor() {
         <label htmlFor="wd-description" className="form-label fw-bold">
           Description
         </label>
-        <textarea id="wd-description" className="form-control" rows={8}>
-          The assignment is available online Submit a link to the landing page
-          of your Web application running on Netlify. The landing page should
-          include: • Your full name and section • Links to each of the lab
-          assignments • Link to the Kanbas application • Links to all relevant
-          source code repositories The Kanbas application should include a link
-          to navigate back to the landing page.
-        </textarea>
+        <textarea
+          id="wd-description"
+          className="form-control"
+          rows={8}
+          defaultValue={assignment.description}
+        />
       </div>
 
       {/* Form Fields */}
@@ -34,7 +48,7 @@ export default function AssignmentEditor() {
             </label>
             <input
               id="wd-points"
-              value={100}
+              defaultValue={assignment.points}
               className="form-control"
               style={{ width: "100px" }}
             />
@@ -158,7 +172,7 @@ export default function AssignmentEditor() {
           </label>
           <input
             id="wd-assign-to"
-            value="Everyone"
+            defaultValue="Everyone"
             className="form-control"
             placeholder="Assign to"
           />
@@ -172,7 +186,7 @@ export default function AssignmentEditor() {
           <input
             id="wd-due-date"
             type="datetime-local"
-            value="2024-05-13T23:59"
+            defaultValue={assignment.dueDate}
             className="form-control"
           />
         </div>
@@ -185,7 +199,7 @@ export default function AssignmentEditor() {
           <input
             id="wd-available-from"
             type="datetime-local"
-            value="2024-05-06T00:00"
+            defaultValue={assignment.availableFrom}
             className="form-control"
           />
         </div>
@@ -198,6 +212,7 @@ export default function AssignmentEditor() {
           <input
             id="wd-available-until"
             type="datetime-local"
+            defaultValue={assignment.availableUntil}
             className="form-control"
           />
         </div>
@@ -205,8 +220,18 @@ export default function AssignmentEditor() {
 
       {/* Action Buttons */}
       <div className="mt-4 d-flex justify-content-end gap-2">
-        <button className="btn btn-secondary">Cancel</button>
-        <button className="btn btn-danger">Save</button>
+        <Link
+          to={`/Kanbas/Courses/${cid}/Assignments`}
+          className="btn btn-secondary"
+        >
+          Cancel
+        </Link>
+        <Link
+          to={`/Kanbas/Courses/${cid}/Assignments`}
+          className="btn btn-danger"
+        >
+          Save
+        </Link>
       </div>
     </div>
   );
