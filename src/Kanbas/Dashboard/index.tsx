@@ -22,6 +22,12 @@ export default function Dashboard() {
     setCourses([...courses, newCourse]);
   };
 
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    e.currentTarget.src = "/logo192.png";
+  };
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -71,9 +77,8 @@ export default function Dashboard() {
                   width="100%"
                   height={160}
                   alt={courseItem.name}
-                  onError={(e) => {
-                    e.currentTarget.src = "/images/reactjs.jpg";
-                  }}
+                  onError={handleImageError}
+                  style={{ objectFit: "cover" }}
                 />
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
