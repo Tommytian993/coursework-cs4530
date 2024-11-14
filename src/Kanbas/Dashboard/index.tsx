@@ -26,6 +26,18 @@ export default function Dashboard() {
     setCourses(courses.filter((course) => course._id !== courseId));
   };
 
+  const updateCourse = () => {
+    setCourses(
+      courses.map((c) => {
+        if (c._id === course._id) {
+          return course;
+        } else {
+          return c;
+        }
+      })
+    );
+  };
+
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
@@ -43,6 +55,13 @@ export default function Dashboard() {
           onClick={addNewCourse}
         >
           Add
+        </button>
+        <button
+          className="btn btn-warning float-end me-2"
+          onClick={updateCourse}
+          id="wd-update-course-click"
+        >
+          Update
         </button>
       </h5>
       <br />
@@ -95,6 +114,16 @@ export default function Dashboard() {
                     {courseItem.description}
                   </p>
                   <button className="btn btn-primary"> Go </button>
+                  <button
+                    id="wd-edit-course-click"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setCourse(courseItem);
+                    }}
+                    className="btn btn-warning me-2 float-end"
+                  >
+                    Edit
+                  </button>
                   <button
                     onClick={(event) => {
                       event.preventDefault();
