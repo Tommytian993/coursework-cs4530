@@ -4,8 +4,7 @@ import * as db from "../Database";
 
 export default function Dashboard() {
   const [courses, setCourses] = useState<any[]>(db.courses);
-
-  const course: any = {
+  const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
     number: "New Number",
@@ -13,7 +12,7 @@ export default function Dashboard() {
     endDate: "2023-12-15",
     image: "/images/reactjs.jpg",
     description: "New Description",
-  };
+  });
 
   const addNewCourse = () => {
     const newCourse = {
@@ -36,6 +35,17 @@ export default function Dashboard() {
           Add
         </button>
       </h5>
+      <br />
+      <input
+        value={course.name}
+        className="form-control mb-2"
+        onChange={(e) => setCourse({ ...course, name: e.target.value })}
+      />
+      <textarea
+        value={course.description}
+        className="form-control"
+        onChange={(e) => setCourse({ ...course, description: e.target.value })}
+      />
       <hr />
       <h2 id="wd-dashboard-published">
         Published Courses ({courses.length})
@@ -57,12 +67,12 @@ export default function Dashboard() {
                 to={`/Kanbas/Courses/${course._id}/Home`}
               >
                 <img
-                  src={course.image || "/logo.svg"}
+                  src={course.image || "/images/reactjs.jpg"}
                   width="100%"
                   height={160}
                   alt={course.name}
                   onError={(e) => {
-                    e.currentTarget.src = "/logo.svg";
+                    e.currentTarget.src = "/images/reactjs.jpg";
                   }}
                 />
                 <div className="card-body">
