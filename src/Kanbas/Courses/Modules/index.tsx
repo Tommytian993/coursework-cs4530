@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import * as db from "../../Database";
 import ModulesControls from "./ModulesControls";
@@ -7,7 +8,7 @@ import { BsGripVertical } from "react-icons/bs";
 
 export default function Modules() {
   const { cid } = useParams();
-  const modules = db.modules;
+  const [modules, setModules] = useState<any[]>(db.modules);
 
   return (
     <div>
