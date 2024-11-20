@@ -9,10 +9,28 @@ import { BsGripVertical } from "react-icons/bs";
 export default function Modules() {
   const { cid } = useParams();
   const [modules, setModules] = useState<any[]>(db.modules);
+  const [moduleName, setModuleName] = useState("");
+
+  const addModule = () => {
+    setModules([
+      ...modules,
+      {
+        _id: new Date().getTime().toString(),
+        name: moduleName,
+        course: cid,
+        lessons: [],
+      },
+    ]);
+    setModuleName("");
+  };
 
   return (
-    <div>
-      <ModulesControls />
+    <div className="wd-modules">
+      <ModulesControls
+        setModuleName={setModuleName}
+        moduleName={moduleName}
+        addModule={addModule}
+      />
       <br />
       <br />
       <br />
