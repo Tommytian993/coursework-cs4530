@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import * as db from "../Database";
 
 export default function Dashboard() {
@@ -13,6 +14,9 @@ export default function Dashboard() {
     image: "/images/reactjs.jpg",
     description: "New Description",
   });
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { enrollments } = db;
 
   const addNewCourse = () => {
     const newCourse = {
@@ -77,68 +81,86 @@ export default function Dashboard() {
       />
       <hr />
       <h2 id="wd-dashboard-published">
-        Published Courses ({courses.length})
+        Published Courses (
+        {
+          courses.filter((course) =>
+            enrollments.some(
+              (enrollment) =>
+                enrollment.user === currentUser._id &&
+                enrollment.course === course._id
+            )
+          ).length
+        }
+        )
       </h2>{" "}
       <hr />
       <div
         id="wd-dashboard-courses"
         className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"
       >
-        {courses.map((courseItem) => (
-          <div
-            key={courseItem._id}
-            className="wd-dashboard-course col"
-            style={{ width: "260px" }}
-          >
-            <div className="card rounded-3 overflow-hidden">
-              <Link
-                className="wd-dashboard-course-link text-decoration-none text-dark"
-                to={`/Kanbas/Courses/${courseItem._id}/Home`}
-              >
-                <img
-                  src={courseItem.image || "/images/reactjs.jpg"}
-                  width="100%"
-                  height={160}
-                  alt={courseItem.name}
-                  onError={handleImageError}
-                  style={{ objectFit: "cover" }}
-                />
-                <div className="card-body">
-                  <h5 className="wd-dashboard-course-title card-title">
-                    {courseItem.name}
-                  </h5>
-                  <p
-                    className="wd-dashboard-course-title card-text overflow-y-hidden"
-                    style={{ maxHeight: 100 }}
-                  >
-                    {courseItem.description}
-                  </p>
-                  <button className="btn btn-primary"> Go </button>
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault();
-                      deleteCourse(courseItem._id);
-                    }}
-                    className="btn btn-danger me-2 float-end"
-                    id="wd-delete-course-click"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    id="wd-edit-course-click"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      setCourse(courseItem);
-                    }}
-                    className="btn btn-warning me-2 float-end"
-                  >
-                    Edit
-                  </button>
-                </div>
-              </Link>
+        {courses
+          .filter((course) =>
+            enrollments.some(
+              (enrollment) =>
+                enrollment.user === currentUser._id &&
+                enrollment.course === course._id
+            )
+          )
+          .map((courseItem) => (
+            <div
+              key={courseItem._id}
+              className="wd-dashboard-course col"
+              style={{ width: "260px" }}
+            >
+              <div className="card rounded-3 overflow-hidden">
+                <Link
+                  className="wd-dashboard-course-link text-decoration-none text-dark"
+                  to={`/Kanbas/Courses/${courseItem._id}/Home`}
+                >
+                  <img
+                    src={courseItem.image || "/images/reactjs.jpg"}
+                    width="100%"
+                    height={160}
+                    alt={courseItem.name}
+                    onError={handleImageError}
+                    style={{ objectFit: "cover" }}
+                  />
+                  <div className="card-body">
+                    <h5 className="wd-dashboard-course-title card-title">
+                      {courseItem.name}
+                    </h5>
+                    <p
+                      className="wd-dashboard-course-title card-text overflow-y-hidden"
+                      style={{ maxHeight: 100 }}
+                    >
+                      {courseItem.description}
+                    </p>
+                    <button className="btn btn-primary"> Go </button>
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        deleteCourse(courseItem._id);
+                      }}
+                      className="btn btn-danger me-2 float-end"
+                      id="wd-delete-course-click"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      id="wd-edit-course-click"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setCourse(courseItem);
+                      }}
+                      className="btn btn-warning me-2 float-end"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
