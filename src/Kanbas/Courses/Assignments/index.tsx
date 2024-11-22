@@ -1,5 +1,7 @@
 import { useParams } from "react-router";
-import * as db from "../../Database";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "./reducer";
 import {
   FaSearch,
   FaPlus,
@@ -7,14 +9,22 @@ import {
   FaCaretDown,
   FaFileAlt,
   FaCheckCircle,
+  FaTrash,
 } from "react-icons/fa";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const courseAssignments = assignments.filter(
     (assignment: any) => assignment.course === cid
   );
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    if (window.confirm("Are you sure you want to delete this assignment?")) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
 
   return (
     <div id="wd-assignments" className="p-4">
@@ -39,9 +49,13 @@ export default function Assignments() {
           >
             {FaPlus({ className: "me-1" })}+ Group
           </button>
-          <button id="wd-add-assignment" className="btn btn-danger">
+          <Link
+            to={`/Kanbas/Courses/${cid}/Assignments/new`}
+            id="wd-add-assignment"
+            className="btn btn-danger"
+          >
             {FaPlus({ className: "me-1" })}+ Assignment
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -76,21 +90,26 @@ export default function Assignments() {
                   {FaFileAlt({ className: "text-muted" })}
                 </div>
                 <div>
-                  <a
+                  <Link
                     className="wd-assignment-link text-decoration-none fw-bold text-dark"
-                    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
                   >
                     {assignment.title}
-                  </a>
+                  </Link>
                   <div className="text-muted small mt-1">
                     <span className="text-danger">Multiple Modules</span> |{" "}
                     <b>Not available until</b> May 6 at 12:00am | <b>Due</b> May
-                    13 at 11:59pm | 100 pts
+                    13 at 11:59pm | {assignment.points} pts
                   </div>
                 </div>
               </div>
               <div className="d-flex align-items-center">
                 {FaCheckCircle({ className: "text-success me-2" })}
+                <FaTrash
+                  className="text-danger me-2"
+                  onClick={() => handleDeleteAssignment(assignment._id)}
+                  style={{ cursor: "pointer" }}
+                />
                 {FaEllipsisV({ className: "text-muted" })}
               </div>
             </div>
