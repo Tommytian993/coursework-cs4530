@@ -105,11 +105,11 @@ export default function Assignments() {
               </div>
               <div className="d-flex align-items-center">
                 {FaCheckCircle({ className: "text-success me-2" })}
-                <FaTrash
-                  className="text-danger me-2"
-                  onClick={() => handleDeleteAssignment(assignment._id)}
-                  style={{ cursor: "pointer" }}
-                />
+                {FaTrash({
+                  className: "text-danger me-2",
+                  onClick: () => handleDeleteAssignment(assignment._id),
+                  style: { cursor: "pointer" },
+                })}
                 {FaEllipsisV({ className: "text-muted" })}
               </div>
             </div>
