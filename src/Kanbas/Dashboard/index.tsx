@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { enrollStudent, unenrollStudent } from "../Enrollments/reducer";
-import * as db from "../Database";
+import { addCourse, deleteCourse, updateCourse } from "../Courses/reducer";
 
 export default function Dashboard() {
-  const [courses, setCourses] = useState<any[]>(db.courses);
   const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
@@ -18,32 +17,34 @@ export default function Dashboard() {
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+  const { courses } = useSelector((state: any) => state.coursesReducer);
   const dispatch = useDispatch();
 
   const [showAllCourses, setShowAllCourses] = useState(false);
 
   const addNewCourse = () => {
-    const newCourse = {
-      ...course,
-      _id: new Date().getTime().toString(),
-    };
-    setCourses([...courses, newCourse]);
+    console.log("Adding new course:", course);
+    dispatch(addCourse(course));
+    // Reset form
+    setCourse({
+      _id: "0",
+      name: "New Course",
+      number: "New Number",
+      startDate: "2023-09-10",
+      endDate: "2023-12-15",
+      image: "/images/reactjs.jpg",
+      description: "New Description",
+    });
   };
 
-  const deleteCourse = (courseId: string) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
+  const deleteCourseHandler = (courseId: string) => {
+    console.log("Deleting course:", courseId);
+    dispatch(deleteCourse(courseId));
   };
 
-  const updateCourse = () => {
-    setCourses(
-      courses.map((c) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
-          return c;
-        }
-      })
-    );
+  const updateCourseHandler = () => {
+    console.log("Updating course:", course);
+    dispatch(updateCourse(course));
   };
 
   const handleImageError = (
@@ -69,7 +70,7 @@ export default function Dashboard() {
 
   const filteredCourses = showAllCourses
     ? courses
-    : courses.filter((course) =>
+    : courses.filter((course: any) =>
         enrollments.some(
           (enrollment: any) =>
             enrollment.user === currentUser._id &&
@@ -108,7 +109,7 @@ export default function Dashboard() {
             </button>
             <button
               className="btn btn-warning float-end me-2"
-              onClick={updateCourse}
+              onClick={updateCourseHandler}
               id="wd-update-course-click"
             >
               Update
@@ -119,6 +120,7 @@ export default function Dashboard() {
             value={course.name}
             className="form-control mb-2"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
+            placeholder="Course Name"
           />
           <textarea
             value={course.description}
@@ -126,6 +128,8 @@ export default function Dashboard() {
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
             }
+            placeholder="Course Description"
+            rows={3}
           />
           <hr />
         </>
@@ -140,7 +144,7 @@ export default function Dashboard() {
         id="wd-dashboard-courses"
         className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"
       >
-        {filteredCourses.map((courseItem) => (
+        {filteredCourses.map((courseItem: any) => (
           <div
             key={courseItem._id}
             className="wd-dashboard-course col"
@@ -176,7 +180,7 @@ export default function Dashboard() {
                       <button
                         onClick={(event) => {
                           event.preventDefault();
-                          deleteCourse(courseItem._id);
+                          deleteCourseHandler(courseItem._id);
                         }}
                         className="btn btn-danger me-2 float-end"
                         id="wd-delete-course-click"
