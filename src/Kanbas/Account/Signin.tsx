@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setCurrentUser } from "./reducer";
 import { useDispatch } from "react-redux";
-import * as db from "../Database";
+import * as client from "./client";
 
 export default function Signin() {
   const [credentials, setCredentials] = useState<any>({
@@ -12,27 +12,26 @@ export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const signin = () => {
-    console.log("Signin attempt with:", credentials);
-    console.log("Available users:", db.users);
+  const signin = async () => {
+    try {
+      console.log("Signin attempt with:", credentials);
+      // 使用客户端API发送登录请求到服务器
+      const user = await client.signin(credentials);
 
-    const user = db.users.find(
-      (u: any) =>
-        u.username === credentials.username &&
-        u.password === credentials.password
-    );
+      if (!user) {
+        alert("Invalid username or password");
+        return;
+      }
 
-    console.log("Found user:", user);
-
-    if (!user) {
-      alert("Invalid username or password");
-      return;
+      console.log("Found user:", user);
+      console.log("Dispatching setCurrentUser with:", user);
+      dispatch(setCurrentUser(user));
+      console.log("Navigating to Dashboard");
+      navigate("/Kanbas/Dashboard");
+    } catch (error) {
+      console.error("Signin error:", error);
+      alert("Login failed. Please try again.");
     }
-
-    console.log("Dispatching setCurrentUser with:", user);
-    dispatch(setCurrentUser(user));
-    console.log("Navigating to Dashboard");
-    navigate("/Kanbas/Dashboard");
   };
 
   return (
