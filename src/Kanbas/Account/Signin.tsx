@@ -5,18 +5,33 @@ import { useDispatch } from "react-redux";
 import * as db from "../Database";
 
 export default function Signin() {
-  const [credentials, setCredentials] = useState<any>({});
+  const [credentials, setCredentials] = useState<any>({
+    username: "",
+    password: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const signin = () => {
+    console.log("Signin attempt with:", credentials);
+    console.log("Available users:", db.users);
+
     const user = db.users.find(
       (u: any) =>
         u.username === credentials.username &&
         u.password === credentials.password
     );
-    if (!user) return;
+
+    console.log("Found user:", user);
+
+    if (!user) {
+      alert("Invalid username or password");
+      return;
+    }
+
+    console.log("Dispatching setCurrentUser with:", user);
     dispatch(setCurrentUser(user));
+    console.log("Navigating to Dashboard");
     navigate("/Kanbas/Dashboard");
   };
 
@@ -24,7 +39,7 @@ export default function Signin() {
     <div id="wd-signin-screen">
       <h1>Sign in</h1>
       <input
-        defaultValue={credentials.username}
+        value={credentials.username}
         onChange={(e) =>
           setCredentials({ ...credentials, username: e.target.value })
         }
@@ -33,7 +48,7 @@ export default function Signin() {
         id="wd-username"
       />
       <input
-        defaultValue={credentials.password}
+        value={credentials.password}
         onChange={(e) =>
           setCredentials({ ...credentials, password: e.target.value })
         }
@@ -52,6 +67,14 @@ export default function Signin() {
       <Link id="wd-signup-link" to="/Kanbas/Account/Signup">
         Sign up
       </Link>
+
+      {/* Debug info */}
+      <div className="mt-3">
+        <small className="text-muted">
+          Test users: iron_man/stark123 (Faculty), dark_knight/wayne123
+          (Student)
+        </small>
+      </div>
     </div>
   );
 }
