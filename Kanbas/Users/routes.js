@@ -23,7 +23,19 @@ export default function UserRoutes(app) {
   const updateUser = (req, res) => {};
 
   // 用户注册 - 处理POST /api/users/signup请求
-  const signup = (req, res) => {};
+  const signup = (req, res) => {
+    // 检查用户名是否已被使用
+    const user = dao.findUserByUsername(req.body.username);
+    if (user) {
+      // 如果用户名已存在，返回400错误
+      res.status(400).json({ message: "Username already in use" });
+      return;
+    }
+    // 创建新用户并设置为当前登录用户
+    currentUser = dao.createUser(req.body);
+    // 返回新创建的用户信息
+    res.json(currentUser);
+  };
 
   // 用户登录 - 处理POST /api/users/signin请求
   const signin = (req, res) => {

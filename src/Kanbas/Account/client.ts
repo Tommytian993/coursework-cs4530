@@ -14,3 +14,11 @@ export const signin = async (credentials: any) => {
   // 返回服务器响应的用户数据
   return response.data;
 };
+
+// 用户注册 - 发送新用户信息到服务器进行注册
+export const signup = async (user: any) => {
+  // 发送POST请求到注册端点，包含新用户信息
+  const response = await axios.post(`${USERS_API}/signup`, user);
+  // 返回服务器响应的用户数据
+  return response.data;
+};
