@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
+import * as client from "./client";
 
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
@@ -12,6 +13,20 @@ export default function Profile() {
   const fetchProfile = () => {
     if (!currentUser) return navigate("/Kanbas/Account/Signin");
     setProfile(currentUser);
+  };
+
+  // 更新用户资料 - 发送更新请求到服务器
+  const updateProfile = async () => {
+    try {
+      // 使用客户端API发送用户更新请求
+      const updatedProfile = await client.updateUser(profile);
+      // 更新Redux状态中的当前用户信息
+      dispatch(setCurrentUser(updatedProfile));
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Update profile error:", error);
+      alert("Failed to update profile. Please try again.");
+    }
   };
 
   const signout = () => {
@@ -83,6 +98,13 @@ export default function Profile() {
             <option value="FACULTY">Faculty</option>
             <option value="STUDENT">Student</option>
           </select>
+          {/* 更新按钮 */}
+          <button
+            onClick={updateProfile}
+            className="btn btn-primary w-100 mb-2"
+          >
+            Update
+          </button>
           <button
             onClick={signout}
             className="btn btn-danger w-100 mb-2"

@@ -20,7 +20,18 @@ export default function UserRoutes(app) {
   const findUserById = (req, res) => {};
 
   // 更新用户 - 处理PUT /api/users/:userId请求
-  const updateUser = (req, res) => {};
+  const updateUser = (req, res) => {
+    // 从URL参数中获取用户ID
+    const userId = req.params.userId;
+    // 从请求体中获取用户更新信息
+    const userUpdates = req.body;
+    // 使用DAO更新用户信息
+    dao.updateUser(userId, userUpdates);
+    // 获取更新后的用户信息
+    currentUser = dao.findUserById(userId);
+    // 返回更新后的用户信息
+    res.json(currentUser);
+  };
 
   // 用户注册 - 处理POST /api/users/signup请求
   const signup = (req, res) => {

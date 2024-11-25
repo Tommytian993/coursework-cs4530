@@ -30,8 +30,10 @@ export const findUserByCredentials = (username, password) =>
   );
 
 // 更新用户信息 - 根据用户ID更新用户数据
-export const updateUser = (userId, user) =>
-  (users = users.map((u) => (u._id === userId ? user : u)));
+export const updateUser = (userId, user) => {
+  users = users.map((u) => (u._id === userId ? user : u));
+  return users.find((u) => u._id === userId);
+};
 
 // 删除用户 - 根据用户ID从用户列表中移除用户
 export const deleteUser = (userId) =>

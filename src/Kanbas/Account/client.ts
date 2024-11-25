@@ -22,3 +22,11 @@ export const signup = async (user: any) => {
   // 返回服务器响应的用户数据
   return response.data;
 };
+
+// 更新用户信息 - 发送用户更新信息到服务器
+export const updateUser = async (user: any) => {
+  // 发送PUT请求到用户更新端点，包含用户ID和更新信息
+  const response = await axios.put(`${USERS_API}/${user._id}`, user);
+  // 返回服务器响应的用户数据
+  return response.data;
+};
