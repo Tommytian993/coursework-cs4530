@@ -29,9 +29,20 @@ export default function Profile() {
     }
   };
 
-  const signout = () => {
-    dispatch(setCurrentUser(null));
-    navigate("/Kanbas/Account/Signin");
+  const signout = async () => {
+    try {
+      // 使用客户端API发送登出请求到服务器
+      await client.signout();
+      // 清除本地Redux状态中的用户信息
+      dispatch(setCurrentUser(null));
+      // 导航到登录页面
+      navigate("/Kanbas/Account/Signin");
+    } catch (error) {
+      console.error("Signout error:", error);
+      // 即使服务器请求失败，也清除本地状态
+      dispatch(setCurrentUser(null));
+      navigate("/Kanbas/Account/Signin");
+    }
   };
 
   useEffect(() => {

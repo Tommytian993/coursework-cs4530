@@ -59,7 +59,12 @@ export default function UserRoutes(app) {
   };
 
   // 用户登出 - 处理POST /api/users/signout请求
-  const signout = (req, res) => {};
+  const signout = (req, res) => {
+    // 清除服务器端当前用户信息
+    currentUser = null;
+    // 返回成功状态码
+    res.sendStatus(200);
+  };
 
   // 获取用户资料 - 处理POST /api/users/profile请求
   const profile = (req, res) => {

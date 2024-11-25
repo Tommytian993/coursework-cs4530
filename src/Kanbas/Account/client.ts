@@ -38,3 +38,11 @@ export const profile = async () => {
   // 返回服务器响应的用户数据
   return response.data;
 };
+
+// 用户登出 - 发送登出请求到服务器
+export const signout = async () => {
+  // 发送POST请求到登出端点
+  const response = await axios.post(`${USERS_API}/signout`);
+  // 返回服务器响应
+  return response.data;
+};
