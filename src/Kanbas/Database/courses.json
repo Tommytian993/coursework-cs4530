@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "RS101",
+    "name": "React JS",
+    "number": "RS101",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Computer Science",
+    "credits": 3,
+    "description": "Full Stack software developer course focusing on React JS fundamentals, components, state management, and hooks."
+  },
+  {
+    "_id": "CN1234",
+    "name": "Chinese",
+    "number": "CN1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Elementary Mandarin course for beginners, covering basic vocabulary, grammar, and conversational skills."
+  },
+  {
+    "_id": "JPN1234",
+    "name": "Japanese",
+    "number": "JPN1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Beginner Japanese course, focusing on foundational language skills and cultural insights."
+  },
+  {
+    "_id": "SPN1234",
+    "name": "Spanish",
+    "number": "SPN1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Elementary Spanish language course, introducing vocabulary, grammar, and conversation."
+  },
+  {
+    "_id": "FRN1234",
+    "name": "French",
+    "number": "FRN1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Beginner French course covering the basics of language and conversation."
+  },
+  {
+    "_id": "ARB1234",
+    "name": "Arabic",
+    "number": "ARB1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Elementary Arabic course, providing an introduction to the language and cultural context."
+  },
+  {
+    "_id": "RSN1234",
+    "name": "Russian",
+    "number": "RSN1234",
+    "startDate": "2023-01-10",
+    "endDate": "2023-05-15",
+    "department": "Languages",
+    "credits": 3,
+    "description": "Beginner Russian language course, emphasizing vocabulary and basic conversation skills."
+  }
+]

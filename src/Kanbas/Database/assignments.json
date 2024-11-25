@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Assignment",
+    "course": "RS101",
+    "description": "Analyze the propulsion mechanisms...",
+    "points": 100,
+    "availableFrom": "2023-05-06",
+    "dueDate": "2023-05-13",
+    "availableUntil": "2023-05-20"
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis",
+    "course": "RS101",
+    "description": "Study combustion processes...",
+    "points": 100,
+    "availableFrom": "2023-05-13",
+    "dueDate": "2023-05-20",
+    "availableUntil": "2023-05-27"
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "description": "Design a nozzle for optimal flow...",
+    "points": 100,
+    "availableFrom": "2023-05-20",
+    "dueDate": "2023-05-27",
+    "availableUntil": "2023-06-03"
+  }
+]
