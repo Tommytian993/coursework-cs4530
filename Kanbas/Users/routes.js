@@ -62,7 +62,10 @@ export default function UserRoutes(app) {
   const signout = (req, res) => {};
 
   // 获取用户资料 - 处理POST /api/users/profile请求
-  const profile = (req, res) => {};
+  const profile = (req, res) => {
+    // 返回服务器端当前用户信息
+    res.json(currentUser);
+  };
 
   // 配置RESTful API路由
   app.post("/api/users", createUser);

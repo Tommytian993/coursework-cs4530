@@ -30,3 +30,11 @@ export const updateUser = async (user: any) => {
   // 返回服务器响应的用户数据
   return response.data;
 };
+
+// 获取用户资料 - 从服务器获取当前用户信息
+export const profile = async () => {
+  // 发送POST请求到用户资料端点
+  const response = await axios.post(`${USERS_API}/profile`);
+  // 返回服务器响应的用户数据
+  return response.data;
+};
