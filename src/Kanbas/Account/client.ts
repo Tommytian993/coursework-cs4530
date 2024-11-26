@@ -10,15 +10,30 @@ export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 // 用户API基础路径
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
 
+// 调试信息
+console.log("REMOTE_SERVER:", REMOTE_SERVER);
+console.log("USERS_API:", USERS_API);
+
 // 用户登录 - 发送用户名和密码到服务器进行验证
 export const signin = async (credentials: any) => {
-  // 发送POST请求到登录端点，包含用户凭据
-  const response = await axiosWithCredentials.post(
-    `${USERS_API}/signin`,
-    credentials
-  );
-  // 返回服务器响应的用户数据
-  return response.data;
+  try {
+    console.log("Attempting signin with:", credentials);
+    console.log("Signin URL:", `${USERS_API}/signin`);
+
+    // 发送POST请求到登录端点，包含用户凭据
+    const response = await axiosWithCredentials.post(
+      `${USERS_API}/signin`,
+      credentials
+    );
+
+    console.log("Signin response:", response.data);
+    // 返回服务器响应的用户数据
+    return response.data;
+  } catch (error: any) {
+    console.error("Signin error:", error);
+    console.error("Error response:", error.response?.data);
+    throw error;
+  }
 };
 
 // 用户注册 - 发送新用户信息到服务器进行注册

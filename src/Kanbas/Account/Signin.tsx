@@ -12,6 +12,11 @@ export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // 调试信息
+  console.log("Environment variables:");
+  console.log("REACT_APP_REMOTE_SERVER:", process.env.REACT_APP_REMOTE_SERVER);
+  console.log("NODE_ENV:", process.env.NODE_ENV);
+
   const signin = async () => {
     try {
       console.log("Signin attempt with:", credentials);
@@ -28,9 +33,17 @@ export default function Signin() {
       dispatch(setCurrentUser(user));
       console.log("Navigating to Dashboard");
       navigate("/Kanbas/Dashboard");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Signin error:", error);
-      alert("Login failed. Please try again.");
+      if (error.response?.status === 401) {
+        alert("Invalid username or password");
+      } else if (error.code === "ERR_NETWORK") {
+        alert("Network error. Please check if the server is running.");
+      } else {
+        alert(
+          `Login failed: ${error.response?.data?.message || error.message}`
+        );
+      }
     }
   };
 
@@ -72,6 +85,10 @@ export default function Signin() {
         <small className="text-muted">
           Test users: iron_man/stark123 (Faculty), dark_knight/wayne123
           (Student)
+        </small>
+        <br />
+        <small className="text-muted">
+          Server: {process.env.REACT_APP_REMOTE_SERVER || "Not configured"}
         </small>
       </div>
     </div>
