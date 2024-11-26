@@ -1,6 +1,7 @@
 // 用户路由 - 实现用户相关的RESTful Web API
 // 在HTTP网络层和JavaScript对象层之间创建接口
 import * as dao from "./dao.js";
+import * as courseDao from "../Courses/dao.js";
 
 // 用户路由配置函数 - 接收Express应用实例并配置路由
 export default function UserRoutes(app) {
@@ -87,6 +88,26 @@ export default function UserRoutes(app) {
     res.json(currentUser);
   };
 
+  // 查找用户已选课程 - 处理GET /api/users/:userId/courses请求
+  const findCoursesForEnrolledUser = (req, res) => {
+    // 从URL参数中获取用户ID
+    let { userId } = req.params;
+    // 如果用户ID是"current"，使用当前登录用户
+    if (userId === "current") {
+      const currentUser = req.session["currentUser"];
+      if (!currentUser) {
+        // 如果没有当前用户，返回401错误
+        res.sendStatus(401);
+        return;
+      }
+      userId = currentUser._id;
+    }
+    // 使用课程DAO获取用户已选课程
+    const courses = courseDao.findCoursesForEnrolledUser(userId);
+    // 返回课程列表
+    res.json(courses);
+  };
+
   // 配置RESTful API路由
   app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
@@ -97,4 +118,5 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
+  app.get("/api/users/:userId/courses", findCoursesForEnrolledUser);
 }

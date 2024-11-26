@@ -55,3 +55,13 @@ export const signout = async () => {
   // 返回服务器响应
   return response.data;
 };
+
+// 获取用户已选课程 - 从服务器获取当前用户的课程列表
+export const findMyCourses = async () => {
+  // 发送GET请求到用户课程端点
+  const { data } = await axiosWithCredentials.get(
+    `${USERS_API}/current/courses`
+  );
+  // 返回课程数据
+  return data;
+};

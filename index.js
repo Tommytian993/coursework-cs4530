@@ -6,6 +6,7 @@ import "dotenv/config";
 
 // 导入路由模块
 import UserRoutes from "./Kanbas/Users/routes.js";
+import CourseRoutes from "./Kanbas/Courses/routes.js";
 
 // 创建Express应用实例
 const app = express();
@@ -43,6 +44,8 @@ app.use(express.json());
 
 // 配置用户路由
 UserRoutes(app);
+// 配置课程路由
+CourseRoutes(app);
 
 // 启动服务器
 const port = process.env.PORT || 4000;
