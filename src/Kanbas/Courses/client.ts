@@ -2,8 +2,9 @@
 // 使用axios发送HTTP请求到课程API
 import axios from "axios";
 
-// 远程服务器地址 - 从环境变量获取
-const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
+// 远程服务器地址 - 从环境变量获取，如果未定义则使用默认值
+const REMOTE_SERVER =
+  process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
 // 课程API基础路径
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
 

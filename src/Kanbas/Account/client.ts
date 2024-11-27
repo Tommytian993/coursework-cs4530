@@ -5,8 +5,9 @@ import axios from "axios";
 // 创建支持Cookie的axios实例
 const axiosWithCredentials = axios.create({ withCredentials: true });
 
-// 远程服务器地址 - 从环境变量获取
-export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
+// 远程服务器地址 - 从环境变量获取，如果未定义则使用默认值
+export const REMOTE_SERVER =
+  process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
 // 用户API基础路径
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
 
