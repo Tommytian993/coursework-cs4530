@@ -6,6 +6,11 @@ export default function AccountNavigation() {
   const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
   const { pathname } = useLocation();
 
+  // 为ADMIN用户添加Users链接
+  if (currentUser && currentUser.role === "ADMIN") {
+    links.push("Users");
+  }
+
   return (
     <div id="wd-account-navigation" className="wd list-group fs-5 rounded-0">
       {links.map((link) => {

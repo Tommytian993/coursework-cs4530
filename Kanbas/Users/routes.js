@@ -19,6 +19,23 @@ export default function UserRoutes(app) {
 
   // 查找所有用户 - 处理GET /api/users请求
   const findAllUsers = async (req, res) => {
+    const { role, name } = req.query;
+
+    // 如果指定了角色，按角色过滤
+    if (role) {
+      const users = await dao.findUsersByRole(role);
+      res.json(users);
+      return;
+    }
+
+    // 如果指定了姓名，按姓名搜索
+    if (name) {
+      const users = await dao.findUsersByPartialName(name);
+      res.json(users);
+      return;
+    }
+
+    // 否则返回所有用户
     const users = await dao.findAllUsers();
     res.json(users);
   };

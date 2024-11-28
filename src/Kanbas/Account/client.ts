@@ -81,3 +81,27 @@ export const findMyCourses = async () => {
   // 返回课程数据
   return data;
 };
+
+// 获取所有用户
+export const findAllUsers = async () => {
+  const response = await axiosWithCredentials.get(USERS_API);
+  return response.data;
+};
+
+// 根据角色查找用户
+export const findUsersByRole = async (role: string) => {
+  const response = await axiosWithCredentials.get(`${USERS_API}?role=${role}`);
+  return response.data;
+};
+
+// 根据姓名查找用户
+export const findUsersByPartialName = async (name: string) => {
+  const response = await axiosWithCredentials.get(`${USERS_API}?name=${name}`);
+  return response.data;
+};
+
+// 创建新用户
+export const createUser = async (user: any) => {
+  const response = await axiosWithCredentials.post(USERS_API, user);
+  return response.data;
+};

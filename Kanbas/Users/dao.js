@@ -28,3 +28,14 @@ export const updateUser = (userId, user) =>
 
 // 删除用户 - 根据用户ID从用户列表中移除用户
 export const deleteUser = (userId) => model.deleteOne({ _id: userId });
+
+// 根据角色查找用户 - 返回指定角色的用户列表
+export const findUsersByRole = (role) => model.find({ role: role });
+
+// 根据部分姓名查找用户 - 支持模糊搜索
+export const findUsersByPartialName = (partialName) => {
+  const regex = new RegExp(partialName, "i"); // 'i'表示不区分大小写
+  return model.find({
+    $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+  });
+};
