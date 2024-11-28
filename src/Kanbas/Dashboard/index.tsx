@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { enrollStudent, unenrollStudent } from "../Enrollments/reducer";
 import { addCourse, deleteCourse, updateCourse } from "../Courses/reducer";
 
-export default function Dashboard() {
+export default function Dashboard({ courses = [] }: { courses?: any[] }) {
   const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
@@ -17,7 +17,6 @@ export default function Dashboard() {
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const { courses } = useSelector((state: any) => state.coursesReducer);
   const dispatch = useDispatch();
 
   const [showAllCourses, setShowAllCourses] = useState(false);

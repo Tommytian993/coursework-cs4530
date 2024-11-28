@@ -5,10 +5,8 @@ import * as dao from "./dao.js";
 // 课程路由配置函数 - 接收Express应用实例并配置路由
 export default function CourseRoutes(app) {
   // 获取所有课程 - 处理GET /api/courses请求
-  app.get("/api/courses", (req, res) => {
-    // 使用DAO获取所有课程
-    const courses = dao.findAllCourses();
-    // 返回课程列表
+  app.get("/api/courses", async (req, res) => {
+    const courses = await dao.findAllCourses();
     res.send(courses);
   });
 }
