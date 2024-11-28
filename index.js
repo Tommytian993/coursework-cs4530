@@ -2,11 +2,20 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
+import mongoose from "mongoose";
 import "dotenv/config";
 
 // 导入路由模块
 import UserRoutes from "./Kanbas/Users/routes.js";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
+
+// MongoDB连接配置
+const CONNECTION_STRING =
+  process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+
+// 连接到MongoDB数据库
+mongoose.connect(CONNECTION_STRING);
+console.log("MongoDB连接字符串:", CONNECTION_STRING);
 
 // 创建Express应用实例
 const app = express();

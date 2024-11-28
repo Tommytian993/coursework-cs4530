@@ -6,63 +6,61 @@ import * as courseDao from "../Courses/dao.js";
 // 用户路由配置函数 - 接收Express应用实例并配置路由
 export default function UserRoutes(app) {
   // 创建用户 - 处理POST /api/users请求
-  const createUser = (req, res) => {};
+  const createUser = async (req, res) => {
+    const user = await dao.createUser(req.body);
+    res.json(user);
+  };
 
   // 删除用户 - 处理DELETE /api/users/:userId请求
-  const deleteUser = (req, res) => {};
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
+  };
 
   // 查找所有用户 - 处理GET /api/users请求
-  const findAllUsers = (req, res) => {};
+  const findAllUsers = async (req, res) => {
+    const users = await dao.findAllUsers();
+    res.json(users);
+  };
 
   // 根据ID查找用户 - 处理GET /api/users/:userId请求
-  const findUserById = (req, res) => {};
+  const findUserById = async (req, res) => {
+    const user = await dao.findUserById(req.params.userId);
+    res.json(user);
+  };
 
   // 更新用户 - 处理PUT /api/users/:userId请求
-  const updateUser = (req, res) => {
-    // 从URL参数中获取用户ID
-    const userId = req.params.userId;
-    // 从请求体中获取用户更新信息
+  const updateUser = async (req, res) => {
+    const { userId } = req.params;
     const userUpdates = req.body;
-    // 使用DAO更新用户信息
-    dao.updateUser(userId, userUpdates);
-    // 获取更新后的用户信息
-    const currentUser = dao.findUserById(userId);
-    // 更新会话中的用户信息
-    req.session["currentUser"] = currentUser;
-    // 返回更新后的用户信息
+    await dao.updateUser(userId, userUpdates);
+    const currentUser = req.session["currentUser"];
+    if (currentUser && currentUser._id === userId) {
+      req.session["currentUser"] = { ...currentUser, ...userUpdates };
+    }
     res.json(currentUser);
   };
 
   // 用户注册 - 处理POST /api/users/signup请求
-  const signup = (req, res) => {
-    // 检查用户名是否已被使用
-    const user = dao.findUserByUsername(req.body.username);
+  const signup = async (req, res) => {
+    const user = await dao.findUserByUsername(req.body.username);
     if (user) {
-      // 如果用户名已存在，返回400错误
-      res.status(400).json({ message: "Username already in use" });
+      res.status(400).json({ message: "Username already taken" });
       return;
     }
-    // 创建新用户并设置为当前登录用户
-    const currentUser = dao.createUser(req.body);
-    // 将用户信息存储到会话中
+    const currentUser = await dao.createUser(req.body);
     req.session["currentUser"] = currentUser;
-    // 返回新创建的用户信息
     res.json(currentUser);
   };
 
   // 用户登录 - 处理POST /api/users/signin请求
-  const signin = (req, res) => {
-    // 从请求体中提取用户名和密码
+  const signin = async (req, res) => {
     const { username, password } = req.body;
-    // 使用DAO验证用户凭据
-    const currentUser = dao.findUserByCredentials(username, password);
+    const currentUser = await dao.findUserByCredentials(username, password);
     if (currentUser) {
-      // 将用户信息存储到会话中
       req.session["currentUser"] = currentUser;
-      // 将当前用户信息发送给客户端
       res.json(currentUser);
     } else {
-      // 如果凭据无效，返回401错误
       res.status(401).json({ message: "Unable to login. Try again later." });
     }
   };
@@ -89,22 +87,17 @@ export default function UserRoutes(app) {
   };
 
   // 查找用户已选课程 - 处理GET /api/users/:userId/courses请求
-  const findCoursesForEnrolledUser = (req, res) => {
-    // 从URL参数中获取用户ID
+  const findCoursesForEnrolledUser = async (req, res) => {
     let { userId } = req.params;
-    // 如果用户ID是"current"，使用当前登录用户
     if (userId === "current") {
       const currentUser = req.session["currentUser"];
       if (!currentUser) {
-        // 如果没有当前用户，返回401错误
         res.sendStatus(401);
         return;
       }
       userId = currentUser._id;
     }
-    // 使用课程DAO获取用户已选课程
-    const courses = courseDao.findCoursesForEnrolledUser(userId);
-    // 返回课程列表
+    const courses = await courseDao.findCoursesForEnrolledUser(userId);
     res.json(courses);
   };
 
