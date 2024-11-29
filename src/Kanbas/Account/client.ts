@@ -105,3 +105,15 @@ export const createUser = async (user: any) => {
   const response = await axiosWithCredentials.post(USERS_API, user);
   return response.data;
 };
+
+// 根据ID查找用户
+export const findUserById = async (id: string) => {
+  const response = await axiosWithCredentials.get(`${USERS_API}/${id}`);
+  return response.data;
+};
+
+// 删除用户
+export const deleteUser = async (userId: string) => {
+  const response = await axiosWithCredentials.delete(`${USERS_API}/${userId}`);
+  return response.data;
+};
