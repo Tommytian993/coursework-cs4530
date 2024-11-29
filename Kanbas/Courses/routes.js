@@ -9,4 +9,25 @@ export default function CourseRoutes(app) {
     const courses = await dao.findAllCourses();
     res.send(courses);
   });
+
+  // 创建新课程 - 处理POST /api/courses请求
+  app.post("/api/courses", async (req, res) => {
+    const course = await dao.createCourse(req.body);
+    res.json(course);
+  });
+
+  // 删除课程 - 处理DELETE /api/courses/:courseId请求
+  app.delete("/api/courses/:courseId", async (req, res) => {
+    const { courseId } = req.params;
+    const status = await dao.deleteCourse(courseId);
+    res.send(status);
+  });
+
+  // 更新课程 - 处理PUT /api/courses/:courseId请求
+  app.put("/api/courses/:courseId", async (req, res) => {
+    const { courseId } = req.params;
+    const courseUpdates = req.body;
+    const status = await dao.updateCourse(courseId, courseUpdates);
+    res.send(status);
+  });
 }

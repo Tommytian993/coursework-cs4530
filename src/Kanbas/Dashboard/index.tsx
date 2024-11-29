@@ -4,47 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { enrollStudent, unenrollStudent } from "../Enrollments/reducer";
 import { addCourse, deleteCourse, updateCourse } from "../Courses/reducer";
 
-export default function Dashboard({ courses = [] }: { courses?: any[] }) {
-  const [course, setCourse] = useState<any>({
-    _id: "0",
-    name: "New Course",
-    number: "New Number",
-    startDate: "2023-09-10",
-    endDate: "2023-12-15",
-    image: "/images/reactjs.jpg",
-    description: "New Description",
-  });
-
+export default function Dashboard({
+  courses = [],
+  course,
+  setCourse,
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+}: {
+  courses?: any[];
+  course?: any;
+  setCourse?: any;
+  addNewCourse?: any;
+  deleteCourse?: any;
+  updateCourse?: any;
+}) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const dispatch = useDispatch();
 
   const [showAllCourses, setShowAllCourses] = useState(false);
-
-  const addNewCourse = () => {
-    console.log("Adding new course:", course);
-    dispatch(addCourse(course));
-    // Reset form
-    setCourse({
-      _id: "0",
-      name: "New Course",
-      number: "New Number",
-      startDate: "2023-09-10",
-      endDate: "2023-12-15",
-      image: "/images/reactjs.jpg",
-      description: "New Description",
-    });
-  };
-
-  const deleteCourseHandler = (courseId: string) => {
-    console.log("Deleting course:", courseId);
-    dispatch(deleteCourse(courseId));
-  };
-
-  const updateCourseHandler = () => {
-    console.log("Updating course:", course);
-    dispatch(updateCourse(course));
-  };
 
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>
@@ -108,7 +87,7 @@ export default function Dashboard({ courses = [] }: { courses?: any[] }) {
             </button>
             <button
               className="btn btn-warning float-end me-2"
-              onClick={updateCourseHandler}
+              onClick={updateCourse}
               id="wd-update-course-click"
             >
               Update
@@ -179,7 +158,7 @@ export default function Dashboard({ courses = [] }: { courses?: any[] }) {
                       <button
                         onClick={(event) => {
                           event.preventDefault();
-                          deleteCourseHandler(courseItem._id);
+                          deleteCourse(courseItem._id);
                         }}
                         className="btn btn-danger me-2 float-end"
                         id="wd-delete-course-click"

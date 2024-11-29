@@ -13,3 +13,19 @@ export function findCoursesForEnrolledUser(userId) {
   // 暂时返回所有课程，后续会通过enrollments关系实现
   return model.find();
 }
+
+// 创建新课程
+export function createCourse(course) {
+  delete course._id; // 删除_id字段，让MongoDB自动生成
+  return model.create(course);
+}
+
+// 删除课程
+export function deleteCourse(courseId) {
+  return model.deleteOne({ _id: courseId });
+}
+
+// 更新课程
+export function updateCourse(courseId, courseUpdates) {
+  return model.updateOne({ _id: courseId }, { $set: courseUpdates });
+}

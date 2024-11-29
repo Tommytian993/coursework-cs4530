@@ -13,6 +13,15 @@ import "./styles.css";
 export default function Kanbas() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [courses, setCourses] = useState<any[]>([]);
+  const [course, setCourse] = useState<any>({
+    _id: "0",
+    name: "New Course",
+    number: "New Number",
+    startDate: "2023-09-10",
+    endDate: "2023-12-15",
+    image: "/images/reactjs.jpg",
+    description: "New Description",
+  });
 
   // 从数据库获取课程列表
   const fetchCourses = async () => {
@@ -21,6 +30,46 @@ export default function Kanbas() {
       setCourses(courses);
     } catch (error) {
       console.error("获取课程失败:", error);
+    }
+  };
+
+  // 添加新课程
+  const addNewCourse = async () => {
+    try {
+      const newCourse = await courseClient.createCourse(course);
+      setCourses([...courses, newCourse]);
+      // 重置表单
+      setCourse({
+        _id: "0",
+        name: "New Course",
+        number: "New Number",
+        startDate: "2023-09-10",
+        endDate: "2023-12-15",
+        image: "/images/reactjs.jpg",
+        description: "New Description",
+      });
+    } catch (error) {
+      console.error("创建课程失败:", error);
+    }
+  };
+
+  // 删除课程
+  const deleteCourse = async (courseId: string) => {
+    try {
+      await courseClient.deleteCourse(courseId);
+      setCourses(courses.filter((course) => course._id !== courseId));
+    } catch (error) {
+      console.error("删除课程失败:", error);
+    }
+  };
+
+  // 更新课程
+  const updateCourse = async (course: any) => {
+    try {
+      await courseClient.updateCourse(course);
+      setCourses(courses.map((c) => (c._id === course._id ? course : c)));
+    } catch (error) {
+      console.error("更新课程失败:", error);
     }
   };
 
@@ -43,7 +92,14 @@ export default function Kanbas() {
               path="/Dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard courses={courses} />
+                  <Dashboard
+                    courses={courses}
+                    course={course}
+                    setCourse={setCourse}
+                    addNewCourse={addNewCourse}
+                    deleteCourse={deleteCourse}
+                    updateCourse={updateCourse}
+                  />
                 </ProtectedRoute>
               }
             />

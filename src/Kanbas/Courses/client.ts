@@ -18,3 +18,24 @@ export const fetchAllCourses = async () => {
   // 返回课程数据
   return data;
 };
+
+// 创建新课程
+export const createCourse = async (course: any) => {
+  const { data } = await axiosWithCredentials.post(COURSES_API, course);
+  return data;
+};
+
+// 删除课程
+export const deleteCourse = async (id: string) => {
+  const { data } = await axiosWithCredentials.delete(`${COURSES_API}/${id}`);
+  return data;
+};
+
+// 更新课程
+export const updateCourse = async (course: any) => {
+  const { data } = await axiosWithCredentials.put(
+    `${COURSES_API}/${course._id}`,
+    course
+  );
+  return data;
+};
