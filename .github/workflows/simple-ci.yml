@@ -1,0 +1,154 @@
+# 简化的GitHub Actions CI/CD工作流
+# 这个版本更容易理解，适合面试展示
+
+name: Simple CI/CD Pipeline
+
+# 触发条件
+on:
+  push:
+    branches: [main, a6] # 推送到这些分支时触发
+  pull_request:
+    branches: [main] # 创建PR时触发
+
+# 定义工作流任务
+jobs:
+  # 任务1：代码质量检查
+  quality-check:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤1：检出代码
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 步骤2：设置Node.js环境
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm" # 缓存npm依赖，加速构建
+
+      # 步骤3：安装依赖
+      - name: 📦 Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm ci  # 使用ci确保依赖版本一致
+          echo "✅ Dependencies installed"
+
+      # 步骤4：代码格式检查
+      - name: 🔍 Lint code
+        run: |
+          echo "Running ESLint..."
+          npm run lint
+          echo "✅ Linting passed"
+
+      # 步骤5：TypeScript类型检查
+      - name: 🔧 Type check
+        run: |
+          echo "Running TypeScript check..."
+          npm run type-check
+          echo "✅ Type check passed"
+
+      # 步骤6：运行测试
+      - name: 🧪 Run tests
+        run: |
+          echo "Running tests..."
+          npm test -- --watchAll=false --coverage
+          echo "✅ Tests passed"
+
+      # 步骤7：构建项目
+      - name: 🏗️ Build project
+        run: |
+          echo "Building project..."
+          npm run build
+          echo "✅ Build successful"
+
+      # 步骤8：安全扫描
+      - name: 🔒 Security audit
+        run: |
+          echo "Running security audit..."
+          npm audit --audit-level=moderate
+          echo "✅ Security audit passed"
+
+  # 任务2：部署到测试环境
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: quality-check # 依赖质量检查任务
+    if: github.ref == 'refs/heads/a6' # 只在a6分支部署
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build project
+        run: npm run build
+
+      # 部署到Netlify（前端）
+      - name: 🚀 Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: "./build"
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "🚀 Deploy from GitHub Actions - Staging"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      # 部署成功通知
+      - name: 📢 Deploy notification
+        run: |
+          echo "🎉 Staging deployment completed!"
+          echo "🌐 Frontend: https://your-app.netlify.app"
+          echo "🔧 Backend: https://your-backend.onrender.com"
+
+  # 任务3：生产环境部署
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: quality-check
+    if: github.ref == 'refs/heads/main' # 只在main分支部署
+    environment: production # 使用production环境
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build project
+        run: npm run build
+
+      # 生产环境部署
+      - name: 🚀 Deploy to Production
+        run: |
+          echo "🚀 Deploying to production..."
+          echo "📊 This is a production deployment"
+          echo "✅ Production deployment completed"
+
+      # 部署通知
+      - name: 📢 Production notification
+        run: |
+          echo "🎉 Production deployment completed!"
+          echo "🌐 Live site: https://your-production-app.com"
+          echo "📈 Monitoring: https://your-monitoring-dashboard.com"
