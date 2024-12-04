@@ -1,188 +1,128 @@
-// import { Link } from "react-router-dom";
-// export default function Dashboard() {
-//   return (
-//     <div id="wd-dashboard">
-//       <h1 id="wd-dashboard-title">Dashboard</h1>
-//       <hr />
-//       <h2 id="wd-dashboard-published">Published Courses (7)</h2>
-//       <hr />
-//       <div
-//         id="wd-dashboard-courses"
-//         className="row row-cols-1 row-cols-md-5 g-4"
-//       >
-//         {/* First Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/reactjs.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 CS1234 React JS
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Full Stack software developer
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
+// src/Dashboard.tsx
 
-//         {/* Second Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/chinese-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 CN1234 Chinese
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Elementary Mandarin
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-
-//         {/* Third Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/japanese-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 JPN1234 Japanese
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Beginner Japanese
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-
-//         {/* Fourth Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/spanish-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 SPN1234 Spanish
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Elementary Spanish
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-
-//         {/* Fifth Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/french-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 FRN1234 French
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Beginner French
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-
-//         {/* Sixth Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/arabic-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 ARB1234 Arabic
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Elementary Arabic
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-
-//         {/* Seventh Course */}
-//         <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-//           <Link
-//             className="wd-dashboard-course-link text-decoration-none text-dark"
-//             to="/Kanbas/Courses/1234/Home"
-//           >
-//             <img src="/images/russian-course.jpg" width="100%" height={160} />
-//             <div className="card-body">
-//               <h5 className="wd-dashboard-course-title card-title">
-//                 RSN1234 Russian
-//               </h5>
-//               <p className="wd-dashboard-course-title card-text">
-//                 Beginner Russian
-//               </p>
-//               <button className="btn btn-primary"> Go </button>
-//             </div>
-//           </Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import * as db from "./Database";
-export default function Dashboard() {
-  const courses = db.courses;
+import { useSelector } from "react-redux";
+
+export default function Dashboard({
+  courses,
+  course,
+  setCourse,
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+}: {
+  courses: any[];
+  course: any;
+  setCourse: (course: any) => void;
+  addNewCourse: () => void;
+  deleteCourse: (courseId: any) => void;
+  updateCourse: () => void;
+}) {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { enrollments } = db;
+
+  // 如果 currentUser 为 null，显示提示或重定向
+  if (!currentUser) {
+    return <div>Please log in to view your dashboard.</div>;
+    // 或者使用重定向到登录页面
+    // return <Redirect to="/login" />;
+  }
+
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">
-        Published Courses ({courses.length})
-      </h2>{" "}
+      <h1 id="wd-dashboard-title">Dashboard</h1>
+      <hr />
+      <h5>
+        New Course
+        <button
+          className="btn btn-primary float-end"
+          id="wd-add-new-course-click"
+          onClick={addNewCourse}
+        >
+          Add
+        </button>
+        <button
+          className="btn btn-warning float-end me-2"
+          onClick={updateCourse}
+          id="wd-update-course-click"
+        >
+          Update
+        </button>
+      </h5>
+      <br />
+      <input
+        value={course.name}
+        className="form-control mb-2"
+        onChange={(e) => setCourse({ ...course, name: e.target.value })}
+      />
+      <textarea
+        value={course.description}
+        className="form-control"
+        onChange={(e) => setCourse({ ...course, description: e.target.value })}
+      />
+      <hr />
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
-          {courses.map((course) => (
-            <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-              <div className="card rounded-3 overflow-hidden">
-                <Link
-                  to={`/Kanbas/Courses/${course._id}/Home`}
-                  className="wd-dashboard-course-link text-decoration-none text-dark"
-                >
-                  <img src="/images/reactjs.jpg" width="100%" height={160} />
-                  <div className="card-body">
-                    <h5 className="wd-dashboard-course-title card-title">
-                      {course.name}{" "}
-                    </h5>
-                    <p
-                      className="wd-dashboard-course-title card-text overflow-y-hidden"
-                      style={{ maxHeight: 100 }}
-                    >
-                      {course.description}{" "}
-                    </p>
-                    <button className="btn btn-primary"> Go </button>
-                  </div>
-                </Link>
+          {courses
+            .filter((course) =>
+              enrollments.some(
+                (enrollment) =>
+                  enrollment.user === currentUser._id &&
+                  enrollment.course === course._id
+              )
+            )
+            .map((course) => (
+              <div
+                key={course._id}
+                className="wd-dashboard-course col"
+                style={{ width: "300px" }}
+              >
+                <div className="card rounded-3 overflow-hidden">
+                  <Link
+                    to={`/Kanbas/Courses/${course._id}/Home`}
+                    className="wd-dashboard-course-link text-decoration-none text-dark"
+                  >
+                    <img src="/images/reactjs.jpg" width="100%" height={160} />
+                    <div className="card-body">
+                      <h5 className="wd-dashboard-course-title card-title">
+                        {course.name}
+                      </h5>
+                      <p
+                        className="wd-dashboard-course-title card-text overflow-y-hidden"
+                        style={{ maxHeight: 100 }}
+                      >
+                        {course.description}
+                      </p>
+                      <button className="btn btn-primary">Go</button>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                        className="btn btn-danger float-end"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 float-end"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
