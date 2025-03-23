@@ -1,6 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
+import { FaPencilAlt } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
 
@@ -15,7 +15,7 @@ export default function ModuleControlButtons({
 }) {
   return (
     <div className="float-end">
-      {FaPencil({
+      {FaPencilAlt({
         onClick: () => editModule(moduleId),
         className: "text-primary me-3",
       })}

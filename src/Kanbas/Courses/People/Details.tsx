@@ -1,6 +1,6 @@
 // 用户详情组件 - 显示用户详细信息并支持编辑
 import { useEffect, useState } from "react";
-import { FaUserCircle, FaPencil, FaCheck } from "react-icons/fa";
+import { FaUserCircle, FaPencilAlt, FaCheck } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useParams, useNavigate } from "react-router";
 import * as client from "../../Account/client";
@@ -61,7 +61,7 @@ export default function PeopleDetails() {
       {/* 用户姓名 - 支持编辑 */}
       <div className="text-danger fs-4">
         {!editing && (
-          <FaPencil
+          <FaPencilAlt
             onClick={() => setEditing(true)}
             className="float-end fs-5 mt-2 wd-edit"
           />
