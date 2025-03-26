@@ -312,12 +312,22 @@ export default function Lab1() {
         <input type="date" id="wd-text-fields-dob" value="2000-01-21" />
         <br />
       </div>
-      
+
       <div id="wd-anchors">
         <h4>Anchor tag</h4>
         Please
-        <a id="wd-lipsum" href="https://www.lipsum.com">click here</a>
-        to get dummy text<br/>
+        <a id="wd-lipsum" href="https://www.lipsum.com">
+          click here
+        </a>
+        to get dummy text
+        <br />
+        <a
+          id="wd-github"
+          href="https://github.com/Tommytian993/coursework-cs4530"
+        >
+          GitHub Repository
+        </a>
+        <br />
       </div>
     </div>
   );
