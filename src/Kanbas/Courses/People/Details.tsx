@@ -49,29 +49,27 @@ export default function PeopleDetails() {
         onClick={() => navigate(-1)}
         className="btn position-fixed end-0 top-0 wd-close-details"
       >
-        <IoCloseSharp className="fs-1" />
+        {IoCloseSharp({ className: "fs-1" })}
       </button>
 
       {/* 用户头像 */}
       <div className="text-center mt-2">
-        <FaUserCircle className="text-secondary me-2 fs-1" />
+        {FaUserCircle({ className: "text-secondary me-2 fs-1" })}
       </div>
       <hr />
 
       {/* 用户姓名 - 支持编辑 */}
       <div className="text-danger fs-4">
-        {!editing && (
-          <FaPencilAlt
-            onClick={() => setEditing(true)}
-            className="float-end fs-5 mt-2 wd-edit"
-          />
-        )}
-        {editing && (
-          <FaCheck
-            onClick={() => saveUser()}
-            className="float-end fs-5 mt-2 me-2 wd-save"
-          />
-        )}
+        {!editing &&
+          FaPencilAlt({
+            onClick: () => setEditing(true),
+            className: "float-end fs-5 mt-2 wd-edit",
+          })}
+        {editing &&
+          FaCheck({
+            onClick: () => saveUser(),
+            className: "float-end fs-5 mt-2 me-2 wd-save",
+          })}
         {!editing && (
           <div className="wd-name" onClick={() => setEditing(true)}>
             {user.firstName} {user.lastName}
