@@ -174,7 +174,12 @@ export default function Lab1() {
         <br />
         Loading a local image:
         <br />
-        <img id="wd-teslabot" src="images/teslabot.jpg" height="200px" alt="Tesla Bot" />
+        <img
+          id="wd-teslabot"
+          src="images/teslabot.jpg"
+          height="200px"
+          alt="Tesla Bot"
+        />
       </div>
       <div id="wd-forms">
         <h4>Form Elements</h4>
